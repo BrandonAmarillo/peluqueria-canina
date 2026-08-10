@@ -5,9 +5,15 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
+import com.mycompany.peluqueriacanina.logica.Controladora;
+import com.mycompany.peluqueriacanina.logica.Duenio;
+import com.mycompany.peluqueriacanina.logica.Mascota;
+import com.mycompany.peluqueriacanina.logica.VerificacionCanina;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -16,6 +22,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
+import java.util.ArrayList;
 
 /*
     Interfaz gráfica de la peluquería canina con swing 
@@ -40,10 +48,12 @@ public class Interfaz extends JFrame {
     private JLabel jlObservaciones;
     private JLabel jlNombreDuenio;
     private JLabel jlTelefono;
+    private JLabel jlDireccion;
 
     private JTextArea jtObservaciones;
     private JTextField jtNombreDuenio;
     private JTextField jtTelefono;
+    private JTextField jtDireccion;
 
     // Botones
     private JButton btnLimpiar;
@@ -51,8 +61,15 @@ public class Interfaz extends JFrame {
 
     private JLabel jlLogo;
 
+    // Controladora
+    private Controladora control;
+    private VerificacionCanina verificacion = new VerificacionCanina();
+
+    private List<String> errores = new ArrayList<String>();
+
     // Constructor
-    public Interfaz() {
+    public Interfaz(Controladora control) {
+        this.control = control;
         setTitle("Peluquería Canina");
         setSize(800, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -168,9 +185,9 @@ public class Interfaz extends JFrame {
         jtNombreDuenio = new JTextField(20);
         add(jtNombreDuenio, gbc);
 
-        // Fila 7: Cel. Dueño
+        // Fila 8: Cel. Dueño
         gbc.gridx = 0; // Columna 0
-        gbc.gridy = 8; // Fila 7
+        gbc.gridy = 8; // Fila 8
         gbc.fill = GridBagConstraints.NONE;
         jlTelefono = new JLabel("Cel. Dueño:");
         add(jlTelefono, gbc);
@@ -181,15 +198,28 @@ public class Interfaz extends JFrame {
         jtTelefono = new JTextField(20);
         add(jtTelefono, gbc);
 
-        // Fila 8: Observaciones
+        // Fila 9: Dirección
+        gbc.gridx = 0;
+        gbc.gridy = 9;
+        gbc.fill = GridBagConstraints.NONE;
+        jlDireccion = new JLabel("Dirección:");
+        add(jlDireccion, gbc);
+
+        gbc.gridx = 1;
+        gbc.gridy = 9;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        jtDireccion = new JTextField(20);
+        add(jtDireccion, gbc);
+
+        // Fila 10: Observaciones
         gbc.gridx = 0; // Columna 0
-        gbc.gridy = 9; // Fila 8
+        gbc.gridy = 10; // Fila 8
         gbc.fill = GridBagConstraints.NONE;
         jlObservaciones = new JLabel("Observaciones:");
         add(jlObservaciones, gbc);
 
         gbc.gridx = 1;
-        gbc.gridy = 9;
+        gbc.gridy = 10;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         jtObservaciones = new JTextArea(5, 10);
         jtObservaciones.setLineWrap(true);
@@ -227,6 +257,12 @@ public class Interfaz extends JFrame {
         gbc.gridy = 11;
         gbc.fill = GridBagConstraints.EAST;
         btnGuardar = new JButton("Guardar");
+        btnGuardar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                guardarDatos();
+            }
+        });
         add(btnGuardar, gbc);
     }
 
@@ -240,6 +276,46 @@ public class Interfaz extends JFrame {
         jcAtencionEspecial.setSelectedIndex(-1);
         jtNombreDuenio.setText("");
         jtTelefono.setText("");
+        jtDireccion.setText("");
         jtObservaciones.setText("");
+    }
+
+    private void guardarDatos() {
+        
+        String nombreDuenio = jtNombreDuenio.getText().trim();
+        String telefono = jtTelefono.getText().trim();
+        String direccion = jtDireccion.getText().trim();
+        
+        
+        int numCliente = Integer.parseInt(jtNumCliente.getText().trim());
+        String nombrePerro = jtNombrePerro.getText().trim();
+        String raza = jtRaza.getText().trim();
+        String color = jtColor.getText().trim();
+        String alergico = (String) jcAlergico.getSelectedItem();
+        String atencionEspecial = (String) jcAtencionEspecial.getSelectedItem();
+        String observaciones = jtObservaciones.getText().trim();
+        
+        errores = verificacion.verificarMascota(numCliente, nombrePerro, raza, color, observaciones, nombreDuenio, telefono, direccion, getControladora());
+        if(errores.isEmpty() || errores == null) {
+            // Primero guardo al dueño
+            Duenio duenio = new Duenio(nombreDuenio, telefono, direccion);
+            getControladora().crearDuenio(duenio);
+
+            // Segundo Guarda a la mascota
+            getControladora().crearMascota(new Mascota(numCliente, nombrePerro, raza, color, alergico, atencionEspecial, observaciones, duenio));
+            JOptionPane.showMessageDialog(null, "Se creo correctamente", "Creación", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(
+                null, 
+                String.join("\n", errores), 
+                "Errores", 
+                JOptionPane.ERROR_MESSAGE
+            );
+        }
+        //Limpiar la lista de errores
+        errores.clear();
+    }
+    private Controladora getControladora() {
+        return control;
     }
 }

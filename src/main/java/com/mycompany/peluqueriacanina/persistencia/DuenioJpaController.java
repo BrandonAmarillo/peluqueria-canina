@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.mycompany.peluqueriacanina.logica.Duenio;
 import com.mycompany.peluqueriacanina.persistencia.excepciones.NonExistentEntityException;
+import com.mycompany.util.JPAUtil;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -33,7 +34,7 @@ public class DuenioJpaController implements Serializable {
      * persistencia
      */
     public DuenioJpaController() {
-        emf = Persistence.createEntityManagerFactory("jpaPeluCaninaPU");
+        emf = JPAUtil.getEntityManagerFactory();
     }
 
     /**

@@ -5,11 +5,11 @@ import java.util.List;
 
 import com.mycompany.peluqueriacanina.logica.Mascota;
 import com.mycompany.peluqueriacanina.persistencia.excepciones.NonExistentEntityException;
+import com.mycompany.util.JPAUtil;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.persistence.Persistence;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
@@ -37,7 +37,7 @@ public class MascotaJpaController implements Serializable {
      * persistencia
      */
     public MascotaJpaController() {
-        emf = Persistence.createEntityManagerFactory("jpaPeluCaninaPU");
+        emf = JPAUtil.getEntityManagerFactory();
     }
 
     /**

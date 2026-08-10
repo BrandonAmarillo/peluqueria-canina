@@ -2,12 +2,15 @@ package com.mycompany.peluqueriacanina.logica;
 
 import java.io.Serializable;
 
+import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 
+@Entity
 public class Mascota implements Serializable {
 
     @Id
@@ -16,6 +19,8 @@ public class Mascota implements Serializable {
 
     @Column(name = "numero_cliente", unique = true, nullable = false)
     private int numeroCliente;
+
+    @Basic
     private String nombre;
     private String raza;
     private String color;

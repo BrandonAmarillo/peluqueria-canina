@@ -2,15 +2,20 @@ package com.mycompany.peluqueriacanina.logica;
 
 import java.io.Serializable;
 
+import jakarta.persistence.Basic;
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+@Entity
 public class Duenio implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
+
+    @Basic
     private String nombre;
     private String telefono;
     private String direccion;
