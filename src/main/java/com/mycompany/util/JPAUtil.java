@@ -37,6 +37,6 @@ public class JPAUtil {
     }
 
     public static EntityManagerFactory getEntityManagerFactory() {
-    return emf;
-}
+        return emf;
+    }
 }
