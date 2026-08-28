@@ -17,7 +17,7 @@ Una peluqueria canina necesita de <strong>un formulario</strong> para <strong>al
 Para poder registrar de manera sencilla y que sea atrativa para el usuario, la dueña de la peluquerua canina proporciona el diseño <strong>APROXIMADO</strong> de la que tiene para la interfaz gráfica de usuario:
 </p>
 
-![foto](../com/imagenes/design-preview.png)
+![foto](src/main/java/com/imagenes/design-preview.png)
 
 <p>
 Como los <strong>datos</strong> deben permanecer en el tiempo y a futuro los empleados de la peluqueria van a poder acceder a ellos, se requiere que cada uno de los registros sean almacenados en una <strong>base de datos</strong>.
