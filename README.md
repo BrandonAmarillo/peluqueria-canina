@@ -34,8 +34,11 @@ Como los <strong>datos</strong> deben permanecer en el tiempo y a futuro los emp
         Para este desarrollo tener en cuenta los conceptos del <strong>MODELOS DE CAPAS</strong>
     </li>
 </ul>
+
 </br>
+
 # Compilación y Ejecución del programa
+
 <p>Compila el código fuente: </p> `mvn compile`.
 <p>Eliminar carpeta target y compila el programa: </p> `mvn clean compile`.
 <p>Compila, ejecuta pruebas y empaqueta el código en un JAR en la carpeta target: </p> `mvn package`.
