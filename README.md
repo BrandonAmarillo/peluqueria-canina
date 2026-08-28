@@ -43,3 +43,7 @@ Como los <strong>datos</strong> deben permanecer en el tiempo y a futuro los emp
 <p>Eliminar carpeta target y compila el programa: <code>mvn clean compile</code>.</p> 
 <p>Compila, ejecuta pruebas y empaqueta el código en un JAR en la carpeta target: <code>mvn package</code>.</p> 
 <p>Ejecuta el programa: <code>mvn javac:java</code>.</p> 
+
+## Requisitos
+- openJDK version 25.0.3
+- javac version 25.0.3
