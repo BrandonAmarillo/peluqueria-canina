@@ -39,7 +39,7 @@ Como los <strong>datos</strong> deben permanecer en el tiempo y a futuro los emp
 
 # Compilación y Ejecución del programa
 
-<p>Compila el código fuente: `mvn compile` .</p> 
-<p>Eliminar carpeta target y compila el programa: `mvn clean compile` .</p> 
-<p>Compila, ejecuta pruebas y empaqueta el código en un JAR en la carpeta target: `mvn package` .</p> 
-<p>Ejecuta el programa: `mvn javac:java` .</p> 
+<p>Compila el código fuente: <code>mvn compile</code>.</p> 
+<p>Eliminar carpeta target y compila el programa: <code>mvn clean compile</code>.</p> 
+<p>Compila, ejecuta pruebas y empaqueta el código en un JAR en la carpeta target: <code>mvn package</code>.</p> 
+<p>Ejecuta el programa: <code>mvn javac:java</code>.</p> 
