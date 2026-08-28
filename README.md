@@ -47,5 +47,70 @@ Como los <strong>datos</strong> deben permanecer en el tiempo y a futuro los emp
 ## Requisitos
 - openJDK version 25.0.3
 - javac version 25.0.3
-- Xampp
+- Apache Maven
+- XAMPP con MariaDB
+
+## Instalación y Configuración de XAMPP
+
+### 1. Descargar e Instalar XAMPP
+
+**En Linux:**
+
+```bash
+# Descargar XAMPP (reemplazar versión según disponibilidad)
+wget https://sourceforge.net/projects/xampp/files/XAMPP%20Linux/8.2.12/xampp-linux-8.2.12-0-installer.run
+
+# Dar permisos de ejecución
+chmod +x xampp-linux-*.run
+
+# Ejecutar el instalador
+sudo ./xampp-linux-*.run
+```
+
+XAMPP se instalará en `/opt/lampp/`.
+
+### 2. Iniciar XAMPP
+
+**En Linux:**
+
+```bash
+sudo /opt/lampp/lampp start
+```
+
+Verifica que Apache y MySQL estén corriendo:
+```bash
+sudo /opt/lampp/lampp status
+```
+
+### 3. Crear la Base de Datos
+
+Accede a phpMyAdmin en tu navegador:
+```
+http://localhost/phpmyadmin/
+```
+
+**O usa la línea de comandos:**
+
+```bash
+# Conectar a MySQL
+/opt/lampp/bin/mysql -u root -p
+
+crea la base de datos con el nombre jpaPeluCanina
+# Salir de MySQL
+exit;
+
+### 5. Parar XAMPP (cuando ya no lo necesites)
+
+```bash
+sudo /opt/lampp/lampp stop
+```
+
+## Compilación y Ejecución del programa
+
+**Importante:** Asegúrate de que XAMPP esté corriendo (`sudo /opt/lampp/lampp start`) antes de ejecutar la aplicación.
+
+<p>Compila el código fuente: <code>mvn compile</code>.</p> 
+<p>Eliminar carpeta target y compila el programa: <code>mvn clean compile</code>.</p> 
+<p>Compila, ejecuta pruebas y empaqueta el código en un JAR en la carpeta target: <code>mvn package</code>.</p>
+<p>Ejecuta el programa: <code>mvn exec:java</code>.</p>
 
